@@ -1,0 +1,27 @@
+.animated-draw {
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    stroke: #000000;
+    stroke-width: 2;
+    stroke-linecap: square;
+    -webkit-animation: faded-draw 3s ease-in-out forwards;
+    animation: faded-draw 3s ease-in-out forwards;
+}
+@-webkit-keyframes faded-draw {
+    0% {
+        fill: rgba(0, 0, 0, 0);
+    }
+    100% {
+        fill: rgba(0, 0, 0, 1);
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes faded-draw {
+    0% {
+        fill: rgba(0, 0, 0, 0);
+    }
+    100% {
+        fill: rgba(0, 0, 0, 1);
+        stroke-dashoffset: 0;
+    }
+}
