@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Jonah Joselow</title>
+    <link rel="stylesheet" href="css/tufte.css" />
+    <link rel="stylesheet" href="css/latex.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js" data-main="js/main.js"></script>
+    <script>
+    require.config({
+        baseUrl: "js",
+        paths: {
+            d3: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.12/d3.min"
+        }
+    });
+    </script>
+</head>
+
+<body>
+    <!-- <div id="social-links-container">
+        <ul>
+            <li>
+                <a href="http://github.com/jonahj" class="svg" target="_blank">
+                    <object class="social-icon" data="img/github.svg" type="image/svg+xml"></object>
+                </a>
+            </li>
+            <li>
+                <a href="http://twitter.com/jonahjoselow" class="svg" target="_blank">
+                    <object class="social-icon" data="img/twitter.svg" type="image/svg+xml"></object>
+                </a>
+            </li>
+            <li>
+                <a href="http://www.linkedin.com/in/jonahjoselow" target="_blank">
+                      <object class="social-icon" data="img/linkedin.svg" type="image/svg+xml"></object>
+                  </a>
+            </li>
+        </ul>
+    </div> -->
+    <article>
+        <h1 id="tufte-css">Hi. I'm Jonah.</h1>
+        <p class="subtitle">NYC Quant &#38; Creative</p>
+        <section>
+            <figure>
+                <label for="interaction-penguin" class="margin-toggle">Penguin</label>
+                <input type="checkbox" id="interaction-penguin" class="margin-toggle" /><span class="marginnote"><div id="svg-container-penguin"></div>Penguin, <em><a href="#svg-animations">SVG Animations</a></em></span>
+            </figure>
+            <p>Working with data by day. Immersive media and interactive storytelling by night. Oh, and dim sum on the weekends.</p>
+        </section>
+        <section>
+            <h2 id="research">Research</h2>
+            <p class="subtitle">Information Retrieval</p>
+            <p>As a member of the <a href="http://ir.cs.georgetown.edu/" target="_blank"><span class="code">The Georgetown University Information Retrieval Lab</span></a> I worked on research to help predict disease incidence using social media</p>
+            <p>We modeled various new cycle's influence on Twitter activity. Then we presented a model for estimating the number of tweets posted in response to a news event and propsed a method to approximate ground truth. This model, while sensative to variations in training data, is able to predict the future Twitter activity with reasonable accuracy.</p>
+            <figure class="fullwidth">
+                <a href="" target="_blank"><img src="img/research-bp-oilspil.png" /></a>
+            </figure>
+            <p>
+                <label for="research-ir-paper" class="margin-toggle">&#8853;</label>
+                <input type="checkbox" id="research-ir-paper" class="margin-toggle" />
+                <span class="marginnote">A. Yates, J. Joselow, N. Goharian, “The news cycle’s influence on social media activity,” <em>International AAAI Conference on Web and Social Media</em> (Cologne, Germany, ICWSM 2016)</span></p>
+            <p class="subtitle">Augmented and Virtual Reality</p>
+            <p>I have also studied augmented reality, virtual reality, and design and have a few projects in the works in various states of completion.</p>
+            <p>While conducting an independent study with <a href="http://www.evanbarba.com/" target="_blank">Evan Barba</a> in Georgetown's Communication, Culture &#38; Technology Lab we devised this interactive synthesizer where user changes the shape of a sphere to affect the pitch and frequency of a loop. Works best with the help of a LeapMotion and it supports the Oculus Rift via WebVR.</p>
+            <figure>
+                <a href="/projects/leapSynth" target="_blank"><img src="img/research-leapsynth.png" /></a>
+            </figure>
+        </section>
+        <section>
+            <h2 id="data-projects">Data Projects</h2>
+            <p class="subtitle">NYC Subway Turnstile</p>
+            <p>I was asked to discover various trends in an <a href="http://web.mta.info/developers/turnstile.html" target="_blank">open dataset</a> from the MTA. Very messy data, but yielded some interesting results. Even made a site to accompany the findings. Find the code and analysis on <a href="https://github.com/JonahJ/nyc-turnstyle" target="_blank">GitHub</a></p>
+            <figure>
+                <label for="data-nyc" class="margin-toggle">&#8853;</label>
+                <input type="checkbox" id="data-nyc" class="margin-toggle" /><span class="marginnote">Look how July 4th changes subway usage! <a href="https://github.com/JonahJ/nyc-turnstyle/blob/master/July%20Analysis.ipynb" target="_blank">July Analysis</a>, <em>NYC Subway Turnstile</em></span>
+                <img src="img/data-nyc.png" />
+            </figure>
+        </section>
+        <section>
+            <h2 id="svg-animations">SVG Animations</h2>
+            <p>I have been fascinated with the ever evolving web standards (specifically <a href="https://www.w3.org/TR/SVG/" target="_blank">SVG</a>) and the ability to <em>draw</em> in this 2D medium. <a href="d3js.org" target="_blank">D3</a>'s robust API support also enables rapid prototyping with data feeds.</p>
+            <p class="subtitle"><a href="/projects/svg/penguin">Penguin</a></p>
+            <p class="subtitle"><a href="/projects/svg/face">Face</a></p>
+        </section>
+        <section>
+            <h2 id="getting-started">Arduino</h2>
+            <p class="subtitle">Conway's Game of Life</p>
+            <p>Built a Conway Game of Life library for the Arduino. Is able to look a few moves back to detect endless cycles and reset automatically for you. It is super optimized to expand the number of cells that are supported with a <a href="https://learn.adafruit.com/adafruit-neopixel-uberguide/overview" target="_blank">NeoMatrix</a> from Adafruit. Grab the code <a href="https://github.com/JonahJ/arduino-game-of-life" target="_blank">here</a>.</p>
+        </section>
+        <section>
+            <h2 id="getting-started">Classy</h2>
+            <p>Emerging in second place from the annual Georgetown Hackathon came <a href="http://classy.thecorp.org" target="_blank">Classy</a>, a simplified preregistration tool. While employed by <a href="thecorp.org" target="_blank">The Corp</a>, we were permitted to expand Classy's functionality so that it was ultimately used by over 75% of students on campus and endorsed by the University Registrar. We coded and designed the final site within five days over an Easter Break.</p>
+            <figure>
+                <label for="classy" class="margin-toggle">&#8853;</label>
+                <input type="checkbox" id="classy" class="margin-toggle" /><span class="marginnote">Icon and design thanks to the ever wonderful<a href="https://www.linkedin.com/in/emily-coch-57b64042" target="_blank"><em>Emily Coch</em></a></span>
+                <a href="http://classy.thecorp.org" target="_blank">
+                    <img src="img/classy.png" />
+                </a>
+            </figure>
+        </section>
+    </article>
+</body>
+
+</html>

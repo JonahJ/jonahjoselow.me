@@ -1,0 +1,60 @@
+body {
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer */
+    -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+
+ul {
+    list-style-position: inside;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+li {
+    /*padding: 0 0 4em 0;*/
+    /*padding-left: 1em;*/
+    /*text-indent: -1em;*/
+}
+li:before {
+    /*content: "§";*/
+    /*padding-right: 5px;*/
+}
+svg {
+    overflow: visible;
+}
+
+#social-links-container {
+
+    /*position:absolute;*/
+    /*top: 0px; */
+    /*right: 0px;*/
+    /*float: right;*/
+    /*width: 500px;*/
+    /*background-color: green;*/
+
+    /*width: 100%;*/
+
+    /*margin-bottom: 200px;*/
+}
+
+#social-links-container ul {
+    text-align: right;
+}
+#social-links-container ul li {
+    /*content: none;*/
+    display: inline;
+    /*list-style-type: none;*/
+    /*padding-right: 10px;*/
+}
+#social-links-container ul li:before {
+    /*content: none;*/
+    /*padding-right: 5px;*/
+}
+#social-links-container ul li a {
+    /*text-decoration: none;*/
+}
+.social-icon {
+    width: 15%;
+}
