@@ -1,10 +1,19 @@
 var PENGUIN_CLICK_TRANSITION_SPEED = 300;
+var MOUTH_MAX_DISTANCE_X = 0;
+var MOUTH_MAX_DISTANCE_Y = 20;
+var EYES_SPEED = 0.3;
+var EYES_MAX_DISTANCE_X = 25;
+var EYES_MAX_DISTANCE_Y = 25;
+var MIN_TIME_FOR_ANIMATION = 100;
 
-define(["d3"], function(d3) {
+define(function(require) {
+    var d3 = require('d3');
 
     var loadSVG = function(xml) {
         var importedNode = document.importNode(xml.documentElement, true);
-        d3.select("#svg-container-penguin").node().appendChild(importedNode);
+        d3.select("#svg-container-penguin")
+            .node()
+            .appendChild(importedNode);
 
         var svg_penguin = d3.select("#svg_penguin");
         var penguin_body = svg_penguin.select("#body");
@@ -41,18 +50,15 @@ define(["d3"], function(d3) {
         /**
          * Assign original d to move back on clicks
          */
-        penguin.arm.left.down.attr("original-d", penguin.arm.left.down.attr("d"));
-        penguin.arm.right.down.attr("original-d", penguin.arm.right.down.attr("d"));
+        penguin.arm.left.down
+            .attr("original-d", penguin.arm.left.down.attr("d"));
+        penguin.arm.right.down
+            .attr("original-d", penguin.arm.right.down.attr("d"));
 
         /**
          * Eyes Movement
          */
-        var EYES_SPEED = 0.3;
-        var EYES_MAX_DISTANCE_X = 25;
-        var EYES_MAX_DISTANCE_Y = 25;
-
         var last_touch_moved = Date.now();
-        var MIN_TIME_FOR_ANIMATION = 100;
 
         var mouse_move = function() {
             var mouse_coordinates = d3.mouse(penguin_eyes.node()) || [0, 0];
@@ -120,7 +126,6 @@ define(["d3"], function(d3) {
                 .attr("d", penguin.arm.right.down.attr("original-d"));
         };
 
-
         d3.select(window).on('mousemove', mouse_move);
         d3.select(window).on('touchmove.drag', mouse_move);
         d3.select(window).on('touchmove.dragstart', openAnimations);
@@ -140,8 +145,6 @@ define(["d3"], function(d3) {
         /**
          * Open and Close Mouth
          */
-        var MOUTH_MAX_DISTANCE_X = 0;
-        var MOUTH_MAX_DISTANCE_Y = 20;
         d3.select(window).on('mousedown', openAnimations);
         d3.select(window).on('mouseup', closeAnimations);
     }
