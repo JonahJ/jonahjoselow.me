@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="css/tufte.css" />
     <link rel="stylesheet" href="css/latex.css" />
     <link rel="stylesheet" href="css/style.css" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.min.js" data-main="js/main.js"></script>
     <script>
@@ -25,29 +24,44 @@
         <p class="subtitle">NYC Quant</p>
         <section>
             <figure>
-                <label for="mn-exports-imports" class="margin-toggle">Penguin</label>
-                <input type="checkbox" id="mn-exports-imports" class="margin-toggle" /><span class="marginnote"><div id="svg-container-penguin"></div>Penguin, <em>SVG Animations</em>, page 1.</span>
+                <label for="interaction-penguin" class="margin-toggle">Penguin</label>
+                <input type="checkbox" id="interaction-penguin" class="margin-toggle" /><span class="marginnote"><div id="svg-container-penguin"></div>Penguin, <em><a href="#svg-animations">SVG Animations</a></em></span>
             </figure>
-            <p>Working with data by day. Immersive media and interactive storytelling by night. And dim sum on the weekends.</p>
-
+            <p>Working with data by day. Immersive media and interactive storytelling by night. Oh, and dim sum on the weekends.</p>
         </section>
         <section>
-            <h2 id="getting-started">Interactive Visualizations</h2>
-            <p>To use Tufte CSS, copy <span class="code">tufte.css</span> and the <span class="code">et-book</span> directory of font files to your project directory, then add the following to your HTML document’s <span class="code">head</span> block:</p>
-            <pre class="code">&lt;link rel="stylesheet"
-      href="tufte.css"/&gt;</pre>
-            <p>Now you just have to use the provided CSS rules, and the Tufte CSS conventions described in this document. For best results, View Source and Inspect Element frequently.</p>
-            <p>
-                <label for="mn-figure-1" class="margin-toggle">&#8853;</label>
-                <input type="checkbox" id="mn-figure-1" class="margin-toggle" />
-                <span class="marginnote">
-                    F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s <em>Visual Explanations</em>.</span> But tight integration of graphics with text is central to Tufte’s work even when those graphics are ancillary to the main body of a text. In many of those cases, a margin figure may be most appropriate. To place figures in the margin, just wrap an image (or whatever) in a margin note inside a <span class="code">p</span> tag, as seen to the right of this paragraph.</p>
+            <h2 id="research">Research</h2>
+            <p class="subtitle">Information Retrieval</p>
+
+            <p>As a member of the <a href="http://ir.cs.georgetown.edu/" target="_blank"><span class="code">The Georgetown University Information Retrieval Lab</span></a> I worked on research to help predict disease incidence using social media</p>
+            <p>We modeled various new cycle's influence on Twitter activity. Then we presented a model for estimating the number of tweets posted in response to a news event and propsed a method to approximate ground truth. This model, while sensative to variations in training data, is able to predict the future Twitter activity with reasonable accuracy.</p>
             <figure class="fullwidth">
-                <img src="img/napoleons-march.png" />
+                <a href="" target="_blank"><img src="img/research-bp-oilspil.png" /></a>
+            </figure>
+            <p>
+                <label for="research-ir-paper" class="margin-toggle">&#8853;</label>
+                <input type="checkbox" id="research-ir-paper" class="margin-toggle" />
+                <span class="marginnote">A. Yates, J. Joselow, N. Goharian, “The news cycle’s influence on social media activity,” <em>International AAAI Conference on Web and Social Media</em> (Cologne, Germany, ICWSM 2016)</span></p>
+            <p class="subtitle">Augmented and Virtual Reality</p>
+            <p>I have also studied augmented reality, virtual reality, and design and have a few projects in the works in various states of completion.</p>
+
+            <p>While conducting an independent study with <a href="http://www.evanbarba.com/" target="_blank">Evan Barba</a> in Georgetown's Communication, Culture &#38; Technology Lab we devised this interactive synthesizer where user changes the shape of a sphere to affect the pitch and frequency of a loop. Works best with the help of a LeapMotion and it supports the Oculus Rift via WebVR.</p>
+            <figure class="fullwidth">
+                <a href="/projects/leapSynth" target="_blank"><img src="img/research-leapsynth.png" /></a>
             </figure>
         </section>
         <section>
             <h2 id="getting-started">Data Projects</h2>
+            <figure>
+                <label for="data-nyc" class="margin-toggle">July Analysis</label>
+                <input type="checkbox" id="data-nyc" class="margin-toggle" /><span class="marginnote"><a href="https://github.com/JonahJ/nyc-turnstyle/blob/master/July%20Analysis.ipynb" target="_blank"><img src="img/data-nyc.png" /></a>July Analysis, <em>NYC Subway Turnstile</em></span>
+            </figure>
+            <p class="subtitle">NYC Subway Turnstile</p>
+
+            <p>I was asked to discover various trends in an <a href="http://web.mta.info/developers/turnstile.html" target="_blank">open dataset</a> from the MTA. Very messy data, but yielded some interesting results. Even made a site to accompany the findings. Find the code an analysis on <a href="https://github.com/JonahJ/nyc-turnstyle" target="_blank">GitHub</a></p>
+        </section>
+        <section>
+            <h2 id="svg-animations">SVG Animations</h2>
             <p>To use Tufte CSS, copy <span class="code">tufte.css</span> and the <span class="code">et-book</span> directory of font files to your project directory, then add the following to your HTML document’s <span class="code">head</span> block:</p>
             <pre class="code">&lt;link rel="stylesheet"
       href="tufte.css"/&gt;</pre>

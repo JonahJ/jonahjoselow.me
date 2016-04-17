@@ -15,6 +15,11 @@ module.exports = function(grunt) {
             main: {
                 files: [{
                     expand: true,
+                    cwd: 'projects',
+                    src: '**',
+                    dest: 'build/projects'
+                }, {
+                    expand: true,
                     cwd: 'et-book',
                     src: '**',
                     dest: 'build/et-book'

@@ -6,26 +6,34 @@ define(["d3"], function(d3) {
         var importedNode = document.importNode(xml.documentElement, true);
         d3.select("#svg-container-penguin").node().appendChild(importedNode);
 
-
         var svg_penguin = d3.select("#svg_penguin");
         var penguin_body = svg_penguin.select("#body");
-
         var penguin_mouth = svg_penguin.select("#mouth");
-        var penguin_mouth_upper = penguin_mouth.select("#mouth-upper");
-        var penguin_mouth_lower = penguin_mouth.select("#mouth-lower");
-
         var penguin_eyes = svg_penguin.select("#eyes");
-        var penguin_eye_left = penguin_eyes.select("#eye-left");
-        var penguin_eye_right = penguin_eyes.select("#eye-right");
 
         var arms_down = svg_penguin.select("#arms-down");
-        var arm_down_left = arms_down.select("#arm-down-left");
-        var arm_down_right = arms_down.select("#arm-down-right");
-
         var arms_up_down = svg_penguin.select("#arms-up");
-        var arm_up_left = arms_up_down.select("#arm-up-left");
-        var arm_up_right = arms_up_down.select("#arm-up-right");
 
+        var penguin = {
+            mouth: {
+                upper: penguin_mouth.select("#mouth-upper"),
+                lower: penguin_mouth.select("#mouth-lower"),
+            },
+            eye: {
+                left: penguin_eyes.select("#eye-left"),
+                right: penguin_eyes.select("#eye-right"),
+            },
+            arm: {
+                left: {
+                    up: arms_up_down.select("#arm-up-left"),
+                    down: arms_down.select("#arm-down-left")
+                },
+                right: {
+                    up: arms_up_down.select("#arm-up-right"),
+                    down: arms_down.select("#arm-down-right"),
+                }
+            }
+        };
 
         penguin_eyes.attr("stroke", "#2DAAE1");
         penguin_mouth.attr("fill", "#FF4500");
@@ -33,8 +41,8 @@ define(["d3"], function(d3) {
         /**
          * Assign original d to move back on clicks
          */
-        arm_down_left.attr("original-d", arm_down_left.attr("d"));
-        arm_down_right.attr("original-d", arm_down_right.attr("d"));
+        penguin.arm.left.down.attr("original-d", penguin.arm.left.down.attr("d"));
+        penguin.arm.right.down.attr("original-d", penguin.arm.right.down.attr("d"));
 
         /**
          * Eyes Movement
@@ -76,19 +84,46 @@ define(["d3"], function(d3) {
 
             penguin_eyes
                 .attr("transform", "translate(" + translate_x + "," + translate_y + ")");
-        }
+        };
+
+        var openAnimations = function() {
+            penguin.mouth.lower
+                .transition()
+                .duration(PENGUIN_CLICK_TRANSITION_SPEED)
+                .attr("transform", "translate(" + MOUTH_MAX_DISTANCE_X + ", " + "+" + MOUTH_MAX_DISTANCE_Y + ")");
+
+            penguin.arm.left.down
+                .transition()
+                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
+                .attr("d", penguin.arm.left.up.attr("d"));
+
+            penguin.arm.right.down
+                .transition()
+                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
+                .attr("d", penguin.arm.right.up.attr("d"));
+        };
+
+        var closeAnimations = function() {
+            penguin.mouth.lower
+                .transition()
+                .duration(PENGUIN_CLICK_TRANSITION_SPEED)
+                .attr("transform", "translate(0,0)");
+
+            penguin.arm.left.down
+                .transition()
+                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
+                .attr("d", penguin.arm.left.down.attr("original-d"));
+
+            penguin.arm.right.down
+                .transition()
+                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
+                .attr("d", penguin.arm.right.down.attr("original-d"));
+        };
+
 
         d3.select(window).on('mousemove', mouse_move);
         d3.select(window).on('touchmove.drag', mouse_move);
-        d3.select(window).on('touchmove.dragstart', function() {
-            openAnimations();
-            // var delta = (Date.now() - last_touch_moved);
-            // if (delta >= 1000) {
-            //     last_touch_moved = Date.now();
-
-            // openAnimations();
-            // }
-        });
+        d3.select(window).on('touchmove.dragstart', openAnimations);
         d3.select(window).on('touchmove.dragend', function() {
 
             /**
@@ -109,40 +144,6 @@ define(["d3"], function(d3) {
         var MOUTH_MAX_DISTANCE_Y = 20;
         d3.select(window).on('mousedown', openAnimations);
         d3.select(window).on('mouseup', closeAnimations);
-
-        function openAnimations() {
-            penguin_mouth_lower
-                .transition()
-                .duration(PENGUIN_CLICK_TRANSITION_SPEED)
-                .attr("transform", "translate(" + MOUTH_MAX_DISTANCE_X + ", " + "+" + MOUTH_MAX_DISTANCE_Y + ")");
-
-            arm_down_left
-                .transition()
-                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
-                .attr("d", arm_up_left.attr("d"));
-
-            arm_down_right
-                .transition()
-                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
-                .attr("d", arm_up_right.attr("d"));
-        };
-
-        function closeAnimations() {
-            penguin_mouth_lower
-                .transition()
-                .duration(PENGUIN_CLICK_TRANSITION_SPEED)
-                .attr("transform", "translate(0,0)");
-
-            arm_down_left
-                .transition()
-                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
-                .attr("d", arm_down_left.attr("original-d"));
-
-            arm_down_right
-                .transition()
-                .duration(PENGUIN_CLICK_TRANSITION_SPEED / 5)
-                .attr("d", arm_down_right.attr("original-d"));
-        };
     }
 
     /**
