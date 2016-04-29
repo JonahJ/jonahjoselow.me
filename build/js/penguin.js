@@ -1,9 +1,13 @@
 var PENGUIN_CLICK_TRANSITION_SPEED = 300;
-var MOUTH_MAX_DISTANCE_X = 0;
-var MOUTH_MAX_DISTANCE_Y = 20;
+var MOUTH_MAX_DISTANCE = {
+    x: 0,
+    y: 20
+}
 var EYES_SPEED = 0.3;
-var EYES_MAX_DISTANCE_X = 25;
-var EYES_MAX_DISTANCE_Y = 25;
+var EYES_MAX_DISTANCE = {
+    x: 25,
+    y: 25,
+}
 var MIN_TIME_FOR_ANIMATION = 100;
 
 define(function(require) {
@@ -61,42 +65,42 @@ define(function(require) {
         var last_touch_moved = Date.now();
 
         var mouse_move = function() {
+
+            var boundaries = svg_penguin[0]['0'].getAttribute('viewBox').split(" ");
+
+            var boundary = {
+                x: boundaries[0],
+                y: boundaries[2]
+            };
+
             var mouse_coordinates = d3.mouse(penguin_eyes.node()) || [0, 0];
 
-            var x_boundary = Number(svg_penguin[0]['0'].getAttribute('viewBox').split(" ")[0]);
-            var y_boundary = Number(svg_penguin[0]['0'].getAttribute('viewBox').split(" ")[2]);
-
-            var translate_x = mouse_coordinates[0] - x_boundary;
-            var translate_y = mouse_coordinates[1];
+            var translate = {
+                x: mouse_coordinates[0] - boundary.x,
+                y: mouse_coordinates[1]
+            }
 
             /**
              * Get direction and go max distance
              */
-            if (Math.abs(translate_x) > EYES_MAX_DISTANCE_X) {
-                var direction = translate_x / Math.abs(translate_x)
-                translate_x = direction * EYES_MAX_DISTANCE_X;
-            }
-
-            if (Math.abs(translate_y) > EYES_MAX_DISTANCE_Y) {
-                var direction = translate_y / Math.abs(translate_y)
-                translate_y = direction * EYES_MAX_DISTANCE_Y;
-            }
+            if (Math.abs(translate.x) > EYES_MAX_DISTANCE.x) translate.x = (translate.x / Math.abs(translate.x)) * EYES_MAX_DISTANCE.x;
+            if (Math.abs(translate.y) > EYES_MAX_DISTANCE.y) translate.y = (translate.y / Math.abs(translate.y)) * EYES_MAX_DISTANCE.y;
 
             /**
              * Limit speed
              */
-            translate_x *= EYES_SPEED;
-            translate_y *= EYES_SPEED;
+            translate.x *= EYES_SPEED;
+            translate.y *= EYES_SPEED;
 
             penguin_eyes
-                .attr("transform", "translate(" + translate_x + "," + translate_y + ")");
+                .attr("transform", "translate(" + translate.x + "," + translate.y + ")");
         };
 
         var openAnimations = function() {
             penguin.mouth.lower
                 .transition()
                 .duration(PENGUIN_CLICK_TRANSITION_SPEED)
-                .attr("transform", "translate(" + MOUTH_MAX_DISTANCE_X + ", " + "+" + MOUTH_MAX_DISTANCE_Y + ")");
+                .attr("transform", "translate(" + MOUTH_MAX_DISTANCE.x + ", " + "+" + MOUTH_MAX_DISTANCE.y + ")");
 
             penguin.arm.left.down
                 .transition()
@@ -134,8 +138,8 @@ define(function(require) {
             /**
              * Touch events happen to quickly so fake it
              */
-            var delta = (Date.now() - last_touch_moved);
-            if (delta >= MIN_TIME_FOR_ANIMATION) {
+            var time_delta = (Date.now() - last_touch_moved);
+            if (time_delta >= MIN_TIME_FOR_ANIMATION) {
                 last_touch_moved = Date.now();
                 closeAnimations();
             }
