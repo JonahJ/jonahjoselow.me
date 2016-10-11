@@ -1,3 +1,5 @@
+"use strict";
+
 var PENGUIN_CLICK_TRANSITION_SPEED = 300;
 var MOUTH_MAX_DISTANCE = {
     x: 0,
@@ -60,12 +62,10 @@ define(function(require) {
             .attr("original-d", penguin.arm.right.down.attr("d"));
 
         /**
-         * Eyes Movement
+         * Movement
          */
-        var last_touch_moved = Date.now();
 
-        var mouse_move = function() {
-
+        var eyesFollow = function() {
             var boundaries = svg_penguin[0]['0'].getAttribute('viewBox').split(" ");
 
             var boundary = {
@@ -96,7 +96,7 @@ define(function(require) {
                 .attr("transform", "translate(" + translate.x + "," + translate.y + ")");
         };
 
-        var openAnimations = function() {
+        var stateActive = function() {
             penguin.mouth.lower
                 .transition()
                 .duration(PENGUIN_CLICK_TRANSITION_SPEED)
@@ -113,7 +113,7 @@ define(function(require) {
                 .attr("d", penguin.arm.right.up.attr("d"));
         };
 
-        var closeAnimations = function() {
+        var stateRest = function() {
             penguin.mouth.lower
                 .transition()
                 .duration(PENGUIN_CLICK_TRANSITION_SPEED)
@@ -130,27 +130,26 @@ define(function(require) {
                 .attr("d", penguin.arm.right.down.attr("original-d"));
         };
 
-        d3.select(window).on('mousemove', mouse_move);
-        d3.select(window).on('touchmove.drag', mouse_move);
-        d3.select(window).on('touchmove.dragstart', openAnimations);
-        d3.select(window).on('touchmove.dragend', function() {
+        var last_touch_moved = Date.now();
+
+        var stateActiveThrottler = function() {
 
             /**
              * Touch events happen to quickly so fake it
              */
             var time_delta = (Date.now() - last_touch_moved);
-            if (time_delta >= MIN_TIME_FOR_ANIMATION) {
-                last_touch_moved = Date.now();
-                closeAnimations();
-            }
-        });
+            if (time_delta < MIN_TIME_FOR_ANIMATION) return;
 
+            last_touch_moved = Date.now();
+            stateRest();
+        };
 
-        /**
-         * Open and Close Mouth
-         */
-        d3.select(window).on('mousedown', openAnimations);
-        d3.select(window).on('mouseup', closeAnimations);
+        d3.select(window).on('mousemove', eyesFollow);
+        d3.select(window).on('touchmove.drag', eyesFollow);
+        d3.select(window).on('touchmove.dragstart', stateActive);
+        d3.select(window).on('touchmove.dragend', stateActiveThrottler);
+        d3.select(window).on('mousedown', stateActive);
+        d3.select(window).on('mouseup', stateRest);
     }
 
     /**

@@ -1,7 +1,7 @@
 {
   "name": "jonahjoselow.me",
   "version": "2.0.0",
-  "description": "JonahJoselow.me ===================",
+  "description": "JonahJoselow.com",
   "main": "Gruntfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
